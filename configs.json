@@ -4,8 +4,15 @@
       "Name": "Test",
       "Game":"2788229376",
       "Link": "https://pastebin.com/raw/CAn5pth2",
+      "Creator": "Developer",
+      "Description": "Test config"
+    },
+    {
+      "Name": "Rage",
+      "Game":"2788229376",
+      "Link": "https://pastebin.com/raw/iTvsUdms",
       "Creator": "xz",
-      "Description": "pdiddy da hoodians with this config"
+      "Description": "Z to cframe speed"
     }
   ]
 }
