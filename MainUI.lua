@@ -1,3 +1,5 @@
+local Library = {}
+
 do -- Library
 	Library = {
 		Open = true;
