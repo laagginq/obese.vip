@@ -690,7 +690,7 @@ do -- Library
 			ScriptTitle.BorderSizePixel = 0
 			ScriptTitle.Size = UDim2.new(0, 20, 0, 20)
 			ScriptTitle.FontFace = menu_font
-			ScriptTitle.Text = "Obese.vip | "..OBESEVERSION
+			ScriptTitle.Text = "Obese.vip | ".._G.OBESEVERSION
 			ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ScriptTitle.TextSize = 12.000
 			ScriptTitle.RichText = true
