@@ -2149,6 +2149,7 @@ do -- Library
 			NewList.BorderSizePixel = 0
 			NewList.Size = UDim2.new(1, 0, 0, 34)
 			NewList.Parent = Dropdown.Section.Elements.SectionContent
+			NewList.ZIndex = 50
 
 			function Dropdown:SetVisible(Bool) 
 				NewList.Visible = Bool
