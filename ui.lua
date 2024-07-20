@@ -548,7 +548,6 @@ do -- Library
 				if ColorWindow.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					if not Library:IsMouseOverFrame(ColorWindow) and not Library:IsMouseOverFrame(Icon) then
 						ColorWindow.Visible = false
-						parent.ZIndex = 1
 					end
 				end
 			end)
