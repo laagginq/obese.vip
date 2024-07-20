@@ -304,7 +304,7 @@ do -- Library
 			ColorWindow.Position = UDim2.new(1,-2,1,2)
 			ColorWindow.Size = UDim2.new(0,150,0,146)
 			ColorWindow.AnchorPoint = Vector2.new(1,0)
-			ColorWindow.ZIndex = 100
+			ColorWindow.ZIndex = 200
 			ColorWindow.Visible = false
 			ColorWindow.BorderSizePixel = 1
 			ColorWindow.BackgroundColor3 = Color3.fromRGB(20,20,20)
@@ -548,6 +548,7 @@ do -- Library
 				if ColorWindow.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					if not Library:IsMouseOverFrame(ColorWindow) and not Library:IsMouseOverFrame(Icon) then
 						ColorWindow.Visible = false
+						--parent.ZIndex = 1
 					end
 				end
 			end)
@@ -2149,7 +2150,7 @@ do -- Library
 			NewList.BorderSizePixel = 0
 			NewList.Size = UDim2.new(1, 0, 0, 34)
 			NewList.Parent = Dropdown.Section.Elements.SectionContent
-			NewList.ZIndex = 50
+			NewList.ZIndex = 1
 
 			function Dropdown:SetVisible(Bool) 
 				NewList.Visible = Bool
@@ -2231,7 +2232,7 @@ do -- Library
 			Content.Position = UDim2.new(0, 0, 1, 0)
 			Content.Size = UDim2.new(1, 0, 0, 0)
 			Content.Visible = false
-			Content.ZIndex = 50
+			Content.ZIndex = 6
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
