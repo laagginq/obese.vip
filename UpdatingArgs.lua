@@ -1,4 +1,4 @@
-local Args = {
+return Args = {
     ["UpdateMousePosI"] = {
         2788229376, -- // DH
         7213786345, -- // DHVC
@@ -18,11 +18,10 @@ local Args = {
     ["UpdateMousePos"] = {
         17319408836, -- // OGDH
         11143225577, -- // 1v1 AimTrainer
-		17502123056, -- // AR hood
+	17502123056, -- // AR hood
     },
     ["MoonUpdateMousePos"] = {
         15166543806, -- // HM
-    },
+    }
 }
 -- // If u find this feel free to use on ur script js credit me (xz @swipingfraud2)
-return Args
