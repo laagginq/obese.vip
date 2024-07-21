@@ -1,4 +1,4 @@
-return Args = {
+return {
     ["UpdateMousePosI"] = {
         2788229376, -- // DH
         7213786345, -- // DHVC
