@@ -1869,13 +1869,15 @@ do -- Library
 				end
 			end
 			 
-			function Toggle.SetVisible(bool) 
+
+			function Toggle:SetVisible(bool) 
 				NewToggle.Visible = bool
 			end 
 
 			Toggle.Set(Toggle.State)
 			Library.Flags[Toggle.Flag] = Toggle.State
 			Flags[Toggle.Flag] = Toggle.Set
+
 
 			
 			return Toggle
