@@ -30,4 +30,3 @@ return {
         15166543806, -- // Moon Hood
     }
 }
--- // If u find this feel free to use on ur script js credit me (xz @swipingfraud2)
