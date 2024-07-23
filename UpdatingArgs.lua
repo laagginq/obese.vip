@@ -25,6 +25,10 @@ return {
 	14174018683, -- // JS Hood
 	18177028900, -- // Wanted Hood
 	18459606288, -- // Fatal Hood
+	17721393836, -- // The hood customs
+	17809101348, -- // New Hood
+	16859411452, -- // Hood Z
+	18129399112, -- // Del Hood
     },
     ["MoonUpdateMousePos"] = {
         15166543806, -- // Moon Hood
