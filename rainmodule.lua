@@ -1,3 +1,5 @@
+-- // Credits to buildthomas for the module and credits to me for editing
+
 --[[
 	
 	Rain module v1.0 by buildthomas (July 2018)
@@ -297,7 +299,7 @@ function setup()
 	Emitter.Archivable = false
 	Emitter.TopSurface = Enum.SurfaceType.Smooth
 	Emitter.BottomSurface = Enum.SurfaceType.Smooth
-	Emitter.Name = "__RainEmitter"
+	Emitter.Name = "RainPart"
 	Emitter.Size = MIN_SIZE
 	Emitter.Archivable = false
 	
@@ -562,9 +564,11 @@ local function connectLoop()
 			else
 				
 				-- Update emitter properties
-				Emitter.RainStraight.Transparency = straightSequence
-				Emitter.RainStraight.Rotation = straightRotation
-				Emitter.RainTopDown.Transparency = topdownSequence
+				if Emitter then 
+					Emitter.RainStraight.Transparency = straightSequence
+					Emitter.RainStraight.Rotation = straightRotation
+					Emitter.RainTopDown.Transparency = topdownSequence
+				end
 				
 			end
 			
