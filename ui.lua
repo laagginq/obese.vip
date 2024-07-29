@@ -242,11 +242,6 @@ do -- Library
 					theme.BackgroundColor3 = Color
 				elseif theme:IsA("TextLabel") or theme:IsA("TextBox") then
 					theme.TextColor3 = Color
-					if theme.Name == "ScriptTitle" then 
-						local r, g, b = math.floor(Color.R * 255), math.floor(Color.G * 255), math.floor(Color.B * 255)
-                		local colorString = string.format("%d, %d, %d", r, g, b)
-						theme.Text = 'Obese.<font color="rgb('..colorString..')">vip</font> | '.._G.OBESEVERSION
-					end
 				elseif theme:IsA("ImageLabel") or theme:IsA("ImageButton") and theme.Name ~= "Logo" then
 					theme.ImageColor3 = Color
 				elseif theme:IsA("ScrollingFrame") then
@@ -838,6 +833,10 @@ do -- Library
 					Library:Toggle(not Library.Open)
 				end
 			end)
+
+			function Window:SetText(t)
+				ScriptTitle.Text = t
+			end
 
 			function Window:KeyList() 
 				local NKeyList = {Keybinds = {}};
