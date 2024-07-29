@@ -2,7 +2,7 @@
 local Notifications = {Notifs = {}};
 do 
     local NotificationGui = Instance.new("ScreenGui", Path)
-    NotificationGui.Name = "ScreenGui"
+    NotificationGui.Name = "Obese.vip Notifications"
     NotificationGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     -- 
 	function Notifications:updateNotifsPositions(position)
