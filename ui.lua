@@ -610,7 +610,7 @@ do -- Library
 			if dragging then
 				local MouseLocation = game:GetService("UserInputService"):GetMouseLocation()
 				local X = math.clamp(MouseLocation.X - background.AbsolutePosition.X, 600, 9999)
-				local Y = math.clamp((MouseLocation.Y - 36) - background.AbsolutePosition.Y, 700, 9999)
+				local Y = math.clamp((MouseLocation.Y - 36) - background.AbsolutePosition.Y, 800, 9999)
 				currentsize = UDim2.new(0,X,0,Y)
 				background.Size = currentsize
 			end;
@@ -648,7 +648,7 @@ do -- Library
 			ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			ImageLabel.BorderSizePixel = 0
 			ImageLabel.Position = UDim2.new(0.1, 0, 0.1, 0)
-			ImageLabel.Size = UDim2.new(0, 800, 0, 700)
+			ImageLabel.Size = UDim2.new(0, 800, 0, 800)
 
 			local MainFrame = Instance.new("TextButton")
 			MainFrame.Name = "MainFrame"
