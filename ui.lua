@@ -828,8 +828,8 @@ do -- Library
 					)
 				end
 			end)
-			Library:Connection(game:GetService("UserInputService").InputBegan, function(Input)
-				if Input.KeyCode == Library.UIKey then
+			Library:Connection(game:GetService("UserInputService").InputBegan, function(Input,GP)
+				if Input.KeyCode == Library.UIKey and not GP then
 					Library:Toggle(not Library.Open)
 				end
 			end)
@@ -1706,20 +1706,22 @@ do -- Library
 						Keybind.Binding = Library:Connection(
 							game:GetService("UserInputService").InputBegan,
 							function(input, gpe)
-								set(
-									input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
-										or input.UserInputType
-								)
-								Library:Disconnect(Keybind.Binding)
-								task.wait()
-								Keybind.Binding = nil
+								if not gpe then
+									set(
+										input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
+											or input.UserInputType
+									)
+									Library:Disconnect(Keybind.Binding)
+									task.wait()
+									Keybind.Binding = nil
+								end
 							end
 						)
 					end
 				end)
 				
-				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
-					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey then
+				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp,gpe)
+					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey and not gpe then
 						if Keybind.Mode == "Hold" then
 							if Keybind.Flag then
 								Library.Flags[Keybind.Flag] = true
@@ -2900,20 +2902,22 @@ do -- Library
 					Keybind.Binding = Library:Connection(
 						game:GetService("UserInputService").InputBegan,
 						function(input, gpe)
-							set(
-								input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
-									or input.UserInputType
-							)
-							Library:Disconnect(Keybind.Binding)
-							task.wait()
-							Keybind.Binding = nil
+							if not gpe then
+								set(
+									input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
+										or input.UserInputType
+								)
+								Library:Disconnect(Keybind.Binding)
+								task.wait()
+								Keybind.Binding = nil
+							end
 						end
 					)
 				end
 			end)
 			
-			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
-				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey then
+			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp,gpe)
+				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey and not gpe then
 					if Keybind.Mode == "Hold" then
 						if Keybind.Flag then
 							Library.Flags[Keybind.Flag] = true
