@@ -13,12 +13,12 @@ do -- Library
 		ThemeObjects = {};
 		Holder = nil;
 		Keys = {
-			[Enum.KeyCode.LeftShift] = "LShift",
-			[Enum.KeyCode.RightShift] = "RShift",
-			[Enum.KeyCode.LeftControl] = "LCtrl",
-			[Enum.KeyCode.RightControl] = "RCtrl",
-			[Enum.KeyCode.LeftAlt] = "LAlt",
-			[Enum.KeyCode.RightAlt] = "RAlt",
+			[Enum.KeyCode.LeftShift] = "LS",
+			[Enum.KeyCode.RightShift] = "RS",
+			[Enum.KeyCode.LeftControl] = "LC",
+			[Enum.KeyCode.RightControl] = "RC",
+			[Enum.KeyCode.LeftAlt] = "LA",
+			[Enum.KeyCode.RightAlt] = "RA",
 			[Enum.KeyCode.CapsLock] = "Caps",
 			[Enum.KeyCode.One] = "1",
 			[Enum.KeyCode.Two] = "2",
@@ -2476,9 +2476,7 @@ do -- Library
 			function Dropdown:Refresh(tbl)
 				for _, opt in next, Dropdown.OptionInsts do
 					coroutine.wrap(function()
-						task.spawn(function()
-							opt.button:Destroy()
-						end)
+						opt.button:Remove()
 					end)()
 				end
 				table.clear(Dropdown.OptionInsts)
