@@ -1079,6 +1079,8 @@ do -- Library
 			Left.Size = UDim2.new(0.5, -5, 1, 0)
 			Left.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			Left.ScrollBarThickness = 0
+			Left.CanvasSize = UDim2.new(0,0,0,0)
+
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -1098,6 +1100,7 @@ do -- Library
 			Right.Size = UDim2.new(0.5, -5, 1, 0)
 			Right.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			Right.ScrollBarThickness = 0
+			Right.CanvasSize = UDim2.new(0,0,0,0)
 
 
 			local UIListLayout1 = Instance.new("UIListLayout")
