@@ -336,7 +336,7 @@ end
 
 setup()
 
-game.Players.LocalPlayer.CharacterAdded:Connect(function()
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function()
 	setup()
 end)
 	
