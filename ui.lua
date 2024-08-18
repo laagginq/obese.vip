@@ -1489,6 +1489,10 @@ do -- Library
 			
 			Library:Connection(NewToggle.MouseButton1Down, SetState)
 
+			function Toggle:SetText(t)
+				Title.Text = t
+			end
+
 			function Toggle:Keybind(Properties)
 				local Properties = Properties or {}
 				local Keybind = {
@@ -2097,6 +2101,10 @@ do -- Library
 			function Slider:Set(Value)
 				Set(Value)
 			end
+
+			function Slider:SetText(t)
+				Title.Text = t
+			end
 			
 			Flags[Slider.Flag] = Set
 			Library.Flags[Slider.Flag] = Slider.State
@@ -2472,6 +2480,10 @@ do -- Library
 					end
 				end
 			end
+
+			function Dropdown:SetText(t)
+				Title.Text = t
+			end
 			
 			function Dropdown:Refresh(tbl)
 				for _, opt in next, Dropdown.OptionInsts do
@@ -2586,6 +2598,10 @@ do -- Library
 
 			function Colorpicker:Set(color)
 				colorpickertypes:set(color, false, true)
+			end
+
+			function Colorpicker:SetText(t)
+				Title.Text = t
 			end
 
 			function Colorpicker:Colorpicker(Properties)
@@ -3013,6 +3029,10 @@ do -- Library
 				set(key)
 			end
 
+			function Keybind:SetText(t)
+				Title.Text = t
+			end
+
 			
 			return Keybind
 		end
@@ -3147,6 +3167,10 @@ do -- Library
 				Textbox.Callback(str)
 			end
 
+			function Textbox:SetText(t)
+				Title.Text = t
+			end
+
 			
 			Flags[Textbox.Flag] = set
 			return Textbox
@@ -3231,6 +3255,10 @@ do -- Library
 					TweenService:Create(Value, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(200,200,200)}):Play()
 				end)
 			end)
+
+			function Button:SetText(t)
+				Value.Text = t
+			end
 
 			return Button
 		end
