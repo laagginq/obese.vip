@@ -1070,13 +1070,15 @@ do -- Library
 			NewPage.Visible = false
 			NewPage.Parent = Page.Window.Elements.Holder
 
-			local Left = Instance.new("Frame")
+			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Left.BackgroundTransparency = 1
 			Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Left.BorderSizePixel = 0
 			Left.Size = UDim2.new(0.5, -5, 1, 0)
+			Left.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			Left.ScrollBarThickness = 0
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -1086,7 +1088,7 @@ do -- Library
 
 			Left.Parent = NewPage
 
-			local Right = Instance.new("Frame")
+			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Right.BackgroundTransparency = 1
@@ -1094,6 +1096,9 @@ do -- Library
 			Right.BorderSizePixel = 0
 			Right.Position = UDim2.new(0.5, 5, 0, 0)
 			Right.Size = UDim2.new(0.5, -5, 1, 0)
+			Right.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			Right.ScrollBarThickness = 0
+
 
 			local UIListLayout1 = Instance.new("UIListLayout")
 			UIListLayout1.Name = "UIListLayout"
