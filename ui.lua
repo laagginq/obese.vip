@@ -609,7 +609,7 @@ do -- Library
 		Library:Connection(Mouse.Move, function(input)
 			if dragging then
 				local MouseLocation = game:GetService("UserInputService"):GetMouseLocation()
-				local X = math.clamp(MouseLocation.X - background.AbsolutePosition.X, 400, 9999)
+				local X = math.clamp(MouseLocation.X - background.AbsolutePosition.X, 600, 9999)
 				local Y = math.clamp((MouseLocation.Y - 36) - background.AbsolutePosition.Y, 600, 9999)
 				currentsize = UDim2.new(0,X,0,Y)
 				background.Size = currentsize
@@ -648,7 +648,7 @@ do -- Library
 			ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			ImageLabel.BorderSizePixel = 0
 			ImageLabel.Position = UDim2.new(0.1, 0, 0.1, 0)
-			ImageLabel.Size = UDim2.new(0, 400, 0, 600)
+			ImageLabel.Size = UDim2.new(0, 600, 0, 600)
 
 			local MainFrame = Instance.new("TextButton")
 			MainFrame.Name = "MainFrame"
@@ -3335,7 +3335,7 @@ do -- Library
 			List.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 			List.BorderColor3 = Color3.fromRGB(30, 30, 30)
 			List.Position = UDim2.new(0, 5, 0, 25)
-			List.Size = UDim2.new(1, -10, 0, 350)
+			List.Size = UDim2.new(1, -10, 0, 250)
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
