@@ -223,6 +223,54 @@ do -- Library
 				Library.Holder.Visible = bool;
 			end
 		end;
+
+		local BurgerUI = Instance.new("ScreenGui")
+		BurgerUI.Name = "Obese.VIP BurgerUI"
+		BurgerUI.Parent = game.CoreGui
+		BurgerUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		BurgerUI.DisplayOrder = 1
+
+		local BurgerImage = {
+			"rbxassetid://4027309554",
+			"rbxassetid://4027310554"
+		} 
+		local BurgerSize = UDim2.new(0, 35, 0, 35)
+
+		function createBurger()
+			local fallDuration = math.random(50,60) / 10
+			local Burger = Instance.new("ImageLabel")
+			Burger.Size = BurgerSize
+			Burger.Image = BurgerImage[math.random(1,#BurgerImage)]
+			Burger.BackgroundTransparency = 1
+			Burger.ImageTransparency = 0.3
+			Burger.Position = UDim2.new(math.random(), 0, -0.1, 0)
+			Burger.Parent = BurgerUI
+			Burger.Rotation = math.random(1,360)
+			local endPosition = UDim2.new(Burger.Position.X.Scale, 0, 1.1, 0)
+			local tweenInfo = TweenInfo.new(fallDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+			local tween = TweenService:Create(Burger, tweenInfo, {Position = endPosition})
+			tween:Play()
+			tween.Completed:Connect(function()
+				Burger:Destroy() 
+			end)
+			local rotationDirection = math.random(0, 1) == 0 and -90 or 90
+			local rotationTweenInfo = TweenInfo.new(fallDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true, 0)
+
+			local rotationTween = TweenService:Create(Burger, rotationTweenInfo, {Rotation = Burger.Rotation + rotationDirection})
+			rotationTween:Play()
+		end
+
+		Library = {Holder = {Visible = true}}
+
+		task.spawn(function()
+			while task.wait() do
+				if Library.Holder.Visible then
+					createBurger()
+					task.wait(0.15)
+				end
+			end
+		end)
+
 		
 		function Library:IsMouseOverFrame(Frame)
 			local AbsPos, AbsSize = Frame.AbsolutePosition, Frame.AbsoluteSize;
