@@ -266,7 +266,6 @@ do -- Library
 		
 		function Library:SetOpen(bool)
 			if typeof(bool) == 'boolean' then
-				Burgers = bool
 				Library.Open = bool;
 				Library.Holder.Visible = bool;
 			end
@@ -299,6 +298,7 @@ do -- Library
 		end
 		
 		function Library:Toggle(Bool)
+			Burgers = Bool
 			self.Open = Bool
 			Library.Holder.Visible = Bool
 		end
