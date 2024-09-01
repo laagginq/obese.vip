@@ -262,7 +262,7 @@ do -- Library
 
 		task.spawn(function()
 			while task.wait() do
-				if Library.Holder.Visible then
+				if Library.Holder.Visible and BurgersEnabled then
 					createBurger()
 					task.wait(0.15)
 				end
