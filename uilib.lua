@@ -1,3 +1,5 @@
+-- // boo hoo you found this gg (portals uis are shit)|
+
 local Library = {}
 
 do -- Library
@@ -11,12 +13,12 @@ do -- Library
 		ThemeObjects = {};
 		Holder = nil;
 		Keys = {
-			[Enum.KeyCode.LeftShift] = "LShift",
-			[Enum.KeyCode.RightShift] = "RShift",
-			[Enum.KeyCode.LeftControl] = "LCtrl",
-			[Enum.KeyCode.RightControl] = "RCtrl",
-			[Enum.KeyCode.LeftAlt] = "LAlt",
-			[Enum.KeyCode.RightAlt] = "RAlt",
+			[Enum.KeyCode.LeftShift] = "LS",
+			[Enum.KeyCode.RightShift] = "RS",
+			[Enum.KeyCode.LeftControl] = "LC",
+			[Enum.KeyCode.RightControl] = "RC",
+			[Enum.KeyCode.LeftAlt] = "LA",
+			[Enum.KeyCode.RightAlt] = "RA",
 			[Enum.KeyCode.CapsLock] = "Caps",
 			[Enum.KeyCode.One] = "1",
 			[Enum.KeyCode.Two] = "2",
@@ -214,9 +216,57 @@ do -- Library
 				end
 			end
 		end
+		local Burgers = true
+
+		local BurgerUI = Instance.new("ScreenGui")
+		BurgerUI.Name = "Obese.VIP BurgerUI"
+		BurgerUI.Parent = game.CoreGui
+		BurgerUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		BurgerUI.DisplayOrder = 1
+
+		local BurgerImage = {
+			"rbxassetid://4027309554",
+			"rbxassetid://4027310554"
+		} 
+		local BurgerSize = UDim2.new(0, 35, 0, 35)
+
+		function createBurger()
+			local fallDuration = math.random(50,60) / 10
+			local Burger = Instance.new("ImageLabel")
+			Burger.Size = BurgerSize
+			Burger.Image = BurgerImage[math.random(1,#BurgerImage)]
+			Burger.BackgroundTransparency = 1
+			Burger.ImageTransparency = 0.3
+			Burger.Position = UDim2.new(math.random(), 0, -0.1, 0)
+			Burger.Parent = BurgerUI
+			Burger.Rotation = math.random(1,360)
+			local endPosition = UDim2.new(Burger.Position.X.Scale, 0, 1.1, 0)
+			local tweenInfo = TweenInfo.new(fallDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+			local tween = TweenService:Create(Burger, tweenInfo, {Position = endPosition})
+			tween:Play()
+			tween.Completed:Connect(function()
+				Burger:Destroy() 
+			end)
+			local rotationDirection = math.random(0, 1) == 0 and -90 or 90
+			local rotationTweenInfo = TweenInfo.new(fallDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true, 0)
+
+			local rotationTween = TweenService:Create(Burger, rotationTweenInfo, {Rotation = Burger.Rotation + rotationDirection})
+			rotationTween:Play()
+		end
+
+		task.spawn(function()
+			while task.wait() do
+				if Burgers and BurgersEnabled then
+					createBurger()
+					task.wait(0.15)
+				end
+			end
+		end)
+
 		
 		function Library:SetOpen(bool)
 			if typeof(bool) == 'boolean' then
+				Burgers = bool
 				Library.Open = bool;
 				Library.Holder.Visible = bool;
 			end
@@ -304,7 +354,7 @@ do -- Library
 			ColorWindow.Position = UDim2.new(1,-2,1,2)
 			ColorWindow.Size = UDim2.new(0,150,0,146)
 			ColorWindow.AnchorPoint = Vector2.new(1,0)
-			ColorWindow.ZIndex = 100
+			ColorWindow.ZIndex = 200
 			ColorWindow.Visible = false
 			ColorWindow.BorderSizePixel = 1
 			ColorWindow.BackgroundColor3 = Color3.fromRGB(20,20,20)
@@ -548,7 +598,7 @@ do -- Library
 				if ColorWindow.Visible and Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					if not Library:IsMouseOverFrame(ColorWindow) and not Library:IsMouseOverFrame(Icon) then
 						ColorWindow.Visible = false
-						parent.ZIndex = 1
+						--parent.ZIndex = 1
 					end
 				end
 			end)
@@ -608,7 +658,7 @@ do -- Library
 			if dragging then
 				local MouseLocation = game:GetService("UserInputService"):GetMouseLocation()
 				local X = math.clamp(MouseLocation.X - background.AbsolutePosition.X, 600, 9999)
-				local Y = math.clamp((MouseLocation.Y - 36) - background.AbsolutePosition.Y, 700, 9999)
+				local Y = math.clamp((MouseLocation.Y - 36) - background.AbsolutePosition.Y, 600, 9999)
 				currentsize = UDim2.new(0,X,0,Y)
 				background.Size = currentsize
 			end;
@@ -646,7 +696,7 @@ do -- Library
 			ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			ImageLabel.BorderSizePixel = 0
 			ImageLabel.Position = UDim2.new(0.1, 0, 0.1, 0)
-			ImageLabel.Size = UDim2.new(0, 800, 0, 700)
+			ImageLabel.Size = UDim2.new(0, 600, 0, 600)
 
 			local MainFrame = Instance.new("TextButton")
 			MainFrame.Name = "MainFrame"
@@ -690,7 +740,7 @@ do -- Library
 			ScriptTitle.BorderSizePixel = 0
 			ScriptTitle.Size = UDim2.new(0, 20, 0, 20)
 			ScriptTitle.FontFace = menu_font
-			ScriptTitle.Text = "Obese.vip | ".._G.OBESEVERSION
+			ScriptTitle.Text = 'Obese.<font color="rgb(255, 128, 139)">vip</font> | '.._G.OBESEVERSION
 			ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			ScriptTitle.TextSize = 12.000
 			ScriptTitle.RichText = true
@@ -826,11 +876,15 @@ do -- Library
 					)
 				end
 			end)
-			Library:Connection(game:GetService("UserInputService").InputBegan, function(Input)
-				if Input.KeyCode == Library.UIKey then
+			Library:Connection(game:GetService("UserInputService").InputBegan, function(Input,GP)
+				if Input.KeyCode == Library.UIKey and not GP then
 					Library:Toggle(not Library.Open)
 				end
 			end)
+
+			function Window:SetText(t)
+				ScriptTitle.Text = t
+			end
 
 			function Window:KeyList() 
 				local NKeyList = {Keybinds = {}};
@@ -1064,13 +1118,17 @@ do -- Library
 			NewPage.Visible = false
 			NewPage.Parent = Page.Window.Elements.Holder
 
-			local Left = Instance.new("Frame")
+			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Left.BackgroundTransparency = 1
 			Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Left.BorderSizePixel = 0
 			Left.Size = UDim2.new(0.5, -5, 1, 0)
+			Left.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			Left.ScrollBarThickness = 0
+			Left.CanvasSize = UDim2.new(0,0,0,0)
+
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -1080,7 +1138,7 @@ do -- Library
 
 			Left.Parent = NewPage
 
-			local Right = Instance.new("Frame")
+			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Right.BackgroundTransparency = 1
@@ -1088,6 +1146,10 @@ do -- Library
 			Right.BorderSizePixel = 0
 			Right.Position = UDim2.new(0.5, 5, 0, 0)
 			Right.Size = UDim2.new(0.5, -5, 1, 0)
+			Right.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			Right.ScrollBarThickness = 0
+			Right.CanvasSize = UDim2.new(0,0,0,0)
+
 
 			local UIListLayout1 = Instance.new("UIListLayout")
 			UIListLayout1.Name = "UIListLayout"
@@ -1483,6 +1545,10 @@ do -- Library
 			
 			Library:Connection(NewToggle.MouseButton1Down, SetState)
 
+			function Toggle:SetText(t)
+				Title.Text = t
+			end
+
 			function Toggle:Keybind(Properties)
 				local Properties = Properties or {}
 				local Keybind = {
@@ -1700,20 +1766,22 @@ do -- Library
 						Keybind.Binding = Library:Connection(
 							game:GetService("UserInputService").InputBegan,
 							function(input, gpe)
-								set(
-									input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
-										or input.UserInputType
-								)
-								Library:Disconnect(Keybind.Binding)
-								task.wait()
-								Keybind.Binding = nil
+								if not gpe then
+									set(
+										input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
+											or input.UserInputType
+									)
+									Library:Disconnect(Keybind.Binding)
+									task.wait()
+									Keybind.Binding = nil
+								end
 							end
 						)
 					end
 				end)
 				
-				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
-					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey then
+				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp,gpe)
+					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey and not gpe then
 						if Keybind.Mode == "Hold" then
 							if Keybind.Flag then
 								Library.Flags[Keybind.Flag] = true
@@ -1869,13 +1937,15 @@ do -- Library
 				end
 			end
 			 
-			function Toggle.SetVisible(bool) 
+
+			function Toggle:SetVisible(bool) 
 				NewToggle.Visible = bool
 			end 
 
 			Toggle.Set(Toggle.State)
 			Library.Flags[Toggle.Flag] = Toggle.State
 			Flags[Toggle.Flag] = Toggle.Set
+
 
 			
 			return Toggle
@@ -2087,6 +2157,10 @@ do -- Library
 			function Slider:Set(Value)
 				Set(Value)
 			end
+
+			function Slider:SetText(t)
+				Title.Text = t
+			end
 			
 			Flags[Slider.Flag] = Set
 			Library.Flags[Slider.Flag] = Slider.State
@@ -2150,6 +2224,7 @@ do -- Library
 			NewList.BorderSizePixel = 0
 			NewList.Size = UDim2.new(1, 0, 0, 34)
 			NewList.Parent = Dropdown.Section.Elements.SectionContent
+			NewList.ZIndex = 1
 
 			function Dropdown:SetVisible(Bool) 
 				NewList.Visible = Bool
@@ -2231,7 +2306,7 @@ do -- Library
 			Content.Position = UDim2.new(0, 0, 1, 0)
 			Content.Size = UDim2.new(1, 0, 0, 0)
 			Content.Visible = false
-			Content.ZIndex = 50
+			Content.ZIndex = 6
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -2461,13 +2536,15 @@ do -- Library
 					end
 				end
 			end
+
+			function Dropdown:SetText(t)
+				Title.Text = t
+			end
 			
 			function Dropdown:Refresh(tbl)
 				for _, opt in next, Dropdown.OptionInsts do
 					coroutine.wrap(function()
-						task.spawn(function()
-							opt.button:Destroy()
-						end)
+						opt.button:Remove()
 					end)()
 				end
 				table.clear(Dropdown.OptionInsts)
@@ -2577,6 +2654,10 @@ do -- Library
 
 			function Colorpicker:Set(color)
 				colorpickertypes:set(color, false, true)
+			end
+
+			function Colorpicker:SetText(t)
+				Title.Text = t
 			end
 
 			function Colorpicker:Colorpicker(Properties)
@@ -2891,20 +2972,22 @@ do -- Library
 					Keybind.Binding = Library:Connection(
 						game:GetService("UserInputService").InputBegan,
 						function(input, gpe)
-							set(
-								input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
-									or input.UserInputType
-							)
-							Library:Disconnect(Keybind.Binding)
-							task.wait()
-							Keybind.Binding = nil
+							if not gpe then
+								set(
+									input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode
+										or input.UserInputType
+								)
+								Library:Disconnect(Keybind.Binding)
+								task.wait()
+								Keybind.Binding = nil
+							end
 						end
 					)
 				end
 			end)
 			
-			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
-				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey then
+			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp,gpe)
+				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding and not Keybind.UseKey and not gpe then
 					if Keybind.Mode == "Hold" then
 						if Keybind.Flag then
 							Library.Flags[Keybind.Flag] = true
@@ -3000,6 +3083,10 @@ do -- Library
 			
 			function Keybind:Set(key)
 				set(key)
+			end
+
+			function Keybind:SetText(t)
+				Title.Text = t
 			end
 
 			
@@ -3136,6 +3223,10 @@ do -- Library
 				Textbox.Callback(str)
 			end
 
+			function Textbox:SetText(t)
+				Title.Text = t
+			end
+
 			
 			Flags[Textbox.Flag] = set
 			return Textbox
@@ -3221,6 +3312,10 @@ do -- Library
 				end)
 			end)
 
+			function Button:SetText(t)
+				Value.Text = t
+			end
+
 			return Button
 		end
 		
@@ -3288,7 +3383,7 @@ do -- Library
 			List.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 			List.BorderColor3 = Color3.fromRGB(30, 30, 30)
 			List.Position = UDim2.new(0, 5, 0, 25)
-			List.Size = UDim2.new(1, -10, 0, 225)
+			List.Size = UDim2.new(1, -10, 0.7, 0)
 
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.Name = "UIListLayout"
@@ -3898,163 +3993,4 @@ do -- Library
 	end
 end;
 
-local Notifications = {Notifs = {}};
-do 
-    local NotificationGui = Instance.new("ScreenGui", Path)
-    NotificationGui.Name = "ScreenGui"
-    NotificationGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    -- 
-	function Notifications:updateNotifsPositions(position)
-		for i, v in pairs(Notifications.Notifs) do 
-			local Position = Vector2.new(20, 20)
-			game:GetService("TweenService"):Create(v.Container, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = UDim2.new(0,Position.X,0,Position.Y + (i * 25))}):Play()
-		end 
-	end
-
-	function Notifications:Notification(message, duration, color, flash)
-		local notification = {Container = nil, Objects = {}}
-		--
-		local Position = Vector2.new(20, 20)
-		--
-		local NewInd = Instance.new("Frame")
-		NewInd.Name = "NewInd"
-		NewInd.AutomaticSize = Enum.AutomaticSize.X
-		NewInd.Position = UDim2.new(0,20,0,20)
-		NewInd.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-		NewInd.BackgroundTransparency = 1
-		NewInd.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		NewInd.Size = UDim2.fromOffset(0, 20)
-		NewInd.Parent = NotificationGui
-		notification.Container = NewInd
-
-		local ActualInd = Instance.new("Frame")
-		ActualInd.Name = "ActualInd"
-		ActualInd.AutomaticSize = Enum.AutomaticSize.X
-		ActualInd.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-		ActualInd.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ActualInd.Size = UDim2.fromScale(1, 1)
-		ActualInd.BackgroundTransparency = 1
-
-		local Accent = Instance.new("Frame")
-		Accent.Name = "Accent"
-		Accent.BackgroundColor3 = color or Color3.fromRGB(255,255,255)
-		Accent.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Accent.Size = UDim2.new(0, 2, 1, 0)
-		Accent.ZIndex = 2
-		Accent.BackgroundTransparency = 1
-
-		local UIGradient = Instance.new("UIGradient")
-		UIGradient.Name = "UIGradient"
-		UIGradient.Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(55, 55, 55)),
-		})
-		UIGradient.Parent = Accent
-
-		Accent.Parent = ActualInd
-
-		local IndInline = Instance.new("Frame")
-		IndInline.Name = "IndInline"
-		IndInline.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		IndInline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		IndInline.BorderSizePixel = 0
-		IndInline.Position = UDim2.fromOffset(1, 1)
-		IndInline.Size = UDim2.new(1, -2, 1, -2)
-		IndInline.BackgroundTransparency = 1
-
-		local UIGradient1 = Instance.new("UIGradient")
-		UIGradient1.Name = "UIGradient"
-		UIGradient1.Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(170, 170, 170)),
-		})
-		UIGradient1.Rotation = 90
-		UIGradient1.Parent = IndInline
-
-		local TextLabel = Instance.new("TextLabel")
-		TextLabel.Name = "TextLabel"
-		TextLabel.Font = Enum.Font.GothamBold
-		TextLabel.Text = message
-		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.TextSize = 13
-		TextLabel.TextStrokeTransparency = 0
-		TextLabel.AutomaticSize = Enum.AutomaticSize.X
-		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel.BackgroundTransparency = 1
-		TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextLabel.BorderSizePixel = 0
-		TextLabel.Position = UDim2.fromOffset(6, 0)
-		TextLabel.Size = UDim2.fromScale(0, 1)
-		TextLabel.Parent = IndInline
-		TextLabel.TextTransparency = 1
-
-		local UIPadding = Instance.new("UIPadding")
-		UIPadding.Name = "UIPadding"
-		UIPadding.PaddingRight = UDim.new(0, 6)
-		UIPadding.Parent = IndInline
-
-		IndInline.Parent = ActualInd
-
-		ActualInd.Parent = NewInd
-
-
-		function notification:remove()
-			table.remove(Notifications.Notifs, table.find(Notifications.Notifs, notification))
-			Notifications:updateNotifsPositions(Position)
-			task.wait(0.5)
-			NewInd:Destroy()
-		end
-
-		function notification:updatetext(new)
-			TextLabel.Text = new
-		end
-
-		task.spawn(function()
-			ActualInd.AnchorPoint = Vector2.new(1,0)
-			for i,v in next, NewInd:GetDescendants() do
-				if v:IsA("Frame") then
-					game:GetService("TweenService"):Create(v, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
-				elseif v:IsA("UIStroke") then
-					game:GetService("TweenService"):Create(v, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Transparency = 0.8}):Play()
-				end
-			end
-			local Tween1 = game:GetService("TweenService"):Create(ActualInd, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {AnchorPoint = Vector2.new(0,0)}):Play()
-			game:GetService("TweenService"):Create(TextLabel, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-			task.wait(duration)
-			for i,v in next, NewInd:GetDescendants() do
-				if v:IsA("Frame") then
-					game:GetService("TweenService"):Create(v, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-				elseif v:IsA("UIStroke") then
-					game:GetService("TweenService"):Create(v, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Transparency = 1}):Play()
-				end
-			end
-			game:GetService("TweenService"):Create(TextLabel, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()
-		end)
-
-		task.delay(duration + 0.1, function()
-			notification:remove()
-		end)
-
-		-- Flashing
-		if flash then
-			local time = 0 -- Start at 0 seconds
-			task.spawn(function()
-				while task.wait() do
-					local progress = (math.sin(2 * math.pi * 2 * time) + 1) / 2;
-					local value = color:Lerp(Color3.fromRGB(0, 0, 0), progress)
-
-					Accent.BackgroundColor3 = value
-
-					time = time + 0.01;
-				end
-			end)
-		end
-
-		table.insert(Notifications.Notifs, notification)
-		Notifications:updateNotifsPositions(Position)
-		NewInd.Position = UDim2.new(0,Position.X,0,Position.Y + (table.find(Notifications.Notifs, notification) * 25))
-		return notification
-	end
-end
-
-return Library, Notifications
+return Library
