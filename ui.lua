@@ -260,8 +260,6 @@ do -- Library
 			rotationTween:Play()
 		end
 
-		Library = {Holder = {Visible = true}}
-
 		task.spawn(function()
 			while task.wait() do
 				if Library.Holder.Visible then
