@@ -216,13 +216,7 @@ do -- Library
 				end
 			end
 		end
-		
-		function Library:SetOpen(bool)
-			if typeof(bool) == 'boolean' then
-				Library.Open = bool;
-				Library.Holder.Visible = bool;
-			end
-		end;
+		local Burgers = true
 
 		local BurgerUI = Instance.new("ScreenGui")
 		BurgerUI.Name = "Obese.VIP BurgerUI"
@@ -262,13 +256,21 @@ do -- Library
 
 		task.spawn(function()
 			while task.wait() do
-				if Library.Holder.Visible and BurgersEnabled then
+				if Burgers and BurgersEnabled then
 					createBurger()
 					task.wait(0.15)
 				end
 			end
 		end)
 
+		
+		function Library:SetOpen(bool)
+			if typeof(bool) == 'boolean' then
+				Burgers = bool
+				Library.Open = bool;
+				Library.Holder.Visible = bool;
+			end
+		end;
 		
 		function Library:IsMouseOverFrame(Frame)
 			local AbsPos, AbsSize = Frame.AbsolutePosition, Frame.AbsoluteSize;
