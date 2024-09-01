@@ -299,6 +299,13 @@ do -- Library
 		
 		function Library:Toggle(Bool)
 			Burgers = Bool
+			if Bool == false then 
+				for i,v in pairs(BurgerUI:GetChildren()) do
+					if v:IsA("ImageLabel") then
+						TweenService:Create(v, TweenInfo.new(0.5,Enum.EasingStyle.Quad,Enum.EasingDirection.Out), {BackgroundTransparency = 1, ImageTransparency = 1}):Play()
+					end
+				end
+			end
 			self.Open = Bool
 			Library.Holder.Visible = Bool
 		end
