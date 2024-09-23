@@ -1,3 +1,4 @@
+-- Full credits to the guy that made this
 -- Camera Shaker
 -- Stephen Leitnick
 -- February 26, 2018
