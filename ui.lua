@@ -1,4 +1,5 @@
--- // boo hoo you found this gg (portals uis are shit)|
+-- // boo hoo you found this gg (portals uis are shit)
+-- // If u use this modifed version make sure to credit obese.vip somewhere
 
 local Library = {}
 
